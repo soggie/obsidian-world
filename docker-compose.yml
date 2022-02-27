@@ -1,0 +1,24 @@
+version: '3.1'
+
+volumes:
+  pgdata:
+
+services:
+  db:
+    image: postgres:11
+    restart: always
+    environment:
+      POSTGRES_DB: data
+      POSTGRES_PASSWORD: data
+      POSTGRES_USER: data
+    ports:
+      # Maps 5432 in the container to 13330 in the host
+      - 13200:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:5
+    ports:
+      # Maps 6379 in the container to 13331 in the host
+      - 13201:6379
